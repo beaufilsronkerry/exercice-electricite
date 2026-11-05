@@ -103,3 +103,7 @@ with tab5:
     plus_grandes_consos["label"] = (plus_grandes_consos["quartier"] + " - " + plus_grandes_consos["mois"].astype(str))
 
     st.bar_chart(plus_grandes_consos, x="label", y="kwh", color="type", horizontal=True, x_label="Quartier et Date")
+
+st.markdown("GoodNight Night City")
+
+st.expander("Test")
