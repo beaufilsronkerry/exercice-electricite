@@ -29,12 +29,6 @@ communes = sorted(propre["commune"].unique())
 choix_commune = st.sidebar.multiselect("Commune", communes, default=communes)
 choix_annee = st.sidebar.selectbox("Annee", [2024, 2025], index=1)
 
-if not choix_commune:
-    st.warning("Veuillez choisir une commune")
-else:
-    filtre = propre[propre["commune"].isin(choix_commune)] #Pour choix commune
-    filtre = filtre[pd.to_datetime(filtre["mois"]).dt.year == choix_annee]
-    st.dataframe(filtre)
 
 st.write("2025, toutes communes")
 
@@ -104,6 +98,13 @@ with tab5:
 
     st.bar_chart(plus_grandes_consos, x="label", y="kwh", color="type", horizontal=True, x_label="Quartier et Date")
 
-st.markdown("GoodNight Night City")
+st.title("Conclusion")
+st.markdown(f"En evaluant la correlation entre la consommation et la chaleur et entre la correlation et les heures courant, nous estimons que la consommation suit plutot les heures courant que la chaleur.\n Les chiffres obtenus sont +0.76 pour la correlation avec les heures courant, et -0.15 pour la correlation avec la chaleur.\nCependant, la correlation permet d'evaleur le degre de relation entre deux (2) variables, elle n'est pas une mesure permettant d'affirmer avec certitude que les heures courant sont responsables des variations de consommation.")
 
-st.expander("Test")
+with st.expander("Donnees Filtrees"):
+    if not choix_commune:
+        st.warning("Veuillez choisir une commune")
+    else:
+        filtre = propre[propre["commune"].isin(choix_commune)] #Pour choix commune
+        filtre = filtre[pd.to_datetime(filtre["mois"]).dt.year == choix_annee]
+        st.dataframe(filtre)
